@@ -24,4 +24,4 @@ let remove1Safe report =
     List.exists isSafe mutations
 
 let partA = reports |> List.filter isSafe |> List.length
-reports |> List.filter remove1Safe |> List.length
+let partB = reports |> List.filter remove1Safe |> List.length
