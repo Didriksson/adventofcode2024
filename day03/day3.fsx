@@ -2,8 +2,6 @@ open System
 open System.IO
 open System.Text.RegularExpressions
 
-
-
 let parseAndSum matches =
     let toMul = matches |> List.map (fun x ->
         Regex.Matches(x, "(\d+)") |> Seq.map _.Value |> Seq.toList |> List.map int)
