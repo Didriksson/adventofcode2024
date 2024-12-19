@@ -80,9 +80,9 @@ countQuadrants robotsNewPosition bounds |> List.reduce (*)
 
 let rec runTilPrint robots bounds times =
     let res = robots |> List.map (fun r -> performTimes r bounds 1)
-    let prints = print res bounds            
+                
     if res |> List.map (_.position) |> List.distinct |> List.length = 500 then
-    //if prints |> List.exists (_.Contains("###############################")) = true then
+        let prints = print res bounds
         prints |> List.map Console.WriteLine |> ignore
         Console.WriteLine ("Times: " + (string times))
         exit 1
@@ -90,5 +90,5 @@ let rec runTilPrint robots bounds times =
     else
         runTilPrint res bounds (times + 1)
 
-(runTilPrint robots bounds 0) |> ignore 
+(runTilPrint robots bounds 1) |> ignore 
 
