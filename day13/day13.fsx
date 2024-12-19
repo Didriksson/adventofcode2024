@@ -30,15 +30,15 @@ let clawmachines = File.ReadAllLines "day13/input.txt"
                                     |> List.map parseClawmachine
                                     
 let rec gcd x y =
-    if y = 0 then x
+    if y = 0L then x
     else gcd y (x % y)
  
-(*let isSolvable (clawMachine: ClawMachine) =
+let isSolvable (clawMachine: ClawMachine) =
     let (x1, y1) = clawMachine.a
     let (x2, y2) = clawMachine.b
     let gcd1 = gcd x1 x2
     let gcd2 = gcd y1 y2
-    (clawMachine.prize |> fst) % gcd1 = 0 && (clawMachine.prize |> fst) % gcd2 = 0  *)  
+    (clawMachine.prize |> fst) % gcd1 = 0L && (clawMachine.prize |> snd) % gcd2 = 0L
  
 let pushButton (x:int64, y:int64) times =
     (x * times, y * times)
@@ -53,7 +53,7 @@ let winnerwinner (clawmachine: ClawMachine) coord =
     
 let (height, width) = (101, 101)
 
-// let solvable = clawmachines |> List.filter isSolvable
+let solvable = clawmachines |> List.filter isSolvable
 
 let price (a,b) =
     a * 3 + b
@@ -74,7 +74,10 @@ let convertPartB (c: ClawMachine) =
     let (x,y) = c.prize 
     { a  = c.a ; b = c.b ; prize =  (x + 10000000000000L, y + 10000000000000L) }
     
-let a = clawmachines |> List.map solveForClawMachine |> List.filter (fun f -> not (f.IsEmpty)) |> List.sumBy List.min
+    
+
+let a = solvable |> List.map solveForClawMachine |> List.filter (fun f -> not (f.IsEmpty)) |> List.sumBy List.min
+let b = clawmachines |> List.map convertPartB |> List.map solveForClawMachine |> List.filter (fun f -> not (f.IsEmpty)) |> List.sumBy List.min
         
 
                     
